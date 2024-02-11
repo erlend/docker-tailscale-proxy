@@ -1,0 +1,10 @@
+#!/command/with-contenv sh
+# vi: ft=sh
+exec 2>&1
+
+if [ -S "$TS_SOCKET" ]; then
+  echo "ERROR: The socket $TS_SOCKET is missing. Is Tailscale running?"
+  exit 1
+fi
+
+exec tailscale.nginx-auth -sockpath="$TS_SOCKET"

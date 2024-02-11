@@ -1,6 +1,0 @@
-#!/command/execlineb -P
-# vi: ft=sh
-
-with-contenv
-
-/usr/local/bin/tailscale.nginx-auth -sockpath="$TS_SOCKET"

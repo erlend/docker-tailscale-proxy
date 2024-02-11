@@ -1,0 +1,14 @@
+#!/command/with-contenv sh
+# vi: ft=sh
+exec 2>&1
+
+if [ -z "$TS_HOSTNAME" ]; then
+  echo "ERROR: The environment variable TS_HOSTNAME must be set"
+  exit 1
+fi
+
+if [ -n "$TS_AUTHKEY__FILE" ]; then
+  export TS_AUTHKEY="$(cat "$TS_AUTHKEY__FILE")"
+fi
+
+exec containerboot
