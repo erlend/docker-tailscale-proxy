@@ -1,0 +1,25 @@
+#!/command/execlineb -P
+# vi: ft=sh
+
+with-contenv
+
+cat > /etc/caddy/Caddyfile << CADDYFILE
+$TS_HOSTNAME.$TS_TAILNET.ts.net
+reverse_proxy $CADDY_TARGET
+forward_auth unix//run/tailscale.nginx-auth.sock {
+  uri /auth
+  header_up Remote-Addr {remote_host}
+  header_up Remote-Port {remote_port}
+  header_up Original-URI {uri}
+  copy_headers {
+		Tailscale-User>X-Webauth-User
+		Tailscale-User>X-Webauth-User
+		Tailscale-Name>X-Webauth-Name
+		Tailscale-Login>X-Webauth-Login
+		Tailscale-Tailnet>X-Webauth-Tailnet
+		Tailscale-Profile-Picture>X-Webauth-Profile-Picture
+	}
+}
+CADDYFILE
+
+/usr/local/bin/caddy run --config=/etc/caddy/Caddyfile

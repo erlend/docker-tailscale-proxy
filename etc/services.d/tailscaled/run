@@ -1,0 +1,10 @@
+#!/command/execlineb -P
+# vi: ft=sh
+
+with-contenv
+
+if [ -n "$TS_AUTHKEY__FILE" ]; then
+  export TS_AUTHKEY="$(cat "$TS_AUTHKEY__FILE")"
+fi
+
+/usr/local/bin/containerboot
