@@ -1,5 +1,5 @@
 FROM caddy:2.7.6-alpine as caddy
-FROM tailscale/tailscale:v1.61.11 as tailscale
+FROM tailscale/tailscale:v1.62.1 as tailscale
 FROM alpine:3.19 as base
 
 # Build tailscale.nginx-auth
